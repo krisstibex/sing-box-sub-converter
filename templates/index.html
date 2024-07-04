@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <link rel="icon" href="https://raw.githubusercontent.com/Toperlock/sing-box-subscribe/main/public/favicon.ico" type="image/x-icon">
-    <title>Sing-Box Sub Converter</title>
+    <link rel="icon" href="https://cdn.jsdelivr.net/gh/Toperlock/sing-box-subscribe@main/public/favicon.ico" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="sing-box 订阅转换">
+    <title>生成sing-box配置</title>
     <style>
         body {
             margin: 0;
@@ -13,11 +15,17 @@
             align-items: center;
             height: 100vh;
             background-color: #f0f0f0;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #333;
+            transition: background-image 0.5s ease;
         }
         .title {
-            font-size: 3em;
-            text-align: center;
+            font-size: 1em; /* 减小标题字体大小 */
+            text-align: right;
             color: #333;
+            margin-top: 0;
         }
         .title a {
             color: #ffc0cb;
@@ -26,77 +34,65 @@
         .title a:hover {
             text-decoration: underline;
         }
-    </style>
-    <title>生成sing-box配置</title>
-    <style>
-        body {
-            display: flex;
-            flex-direction: column; /* 垂直排列 */
-            align-items: center; /* 水平居中对齐 */
-            max-width: 100%; /* 调整内容最大宽度 */
-            /* transform: scale(1.9);  将内容放大190% */
-            justify-content: center;
-            height: 100vh; /* 使内容在垂直方向上居中 */
-            margin: 0; /* 去掉默认的页面边距 */
-            font-family: Arial, sans-serif; /* 可选的字体 */
-            background-color: #f2f2f2;
-        }
         .container {
             display: flex;
             flex-direction: row; /* 水平排列 */
             align-items: center; /* 水平居中对齐 */
+            z-index: 2;
         }
-        /*
-        .left-box {
-            flex: 1;
-            padding: 10px;
-        }
-        */
         .right-box {
             flex: 2;
             padding: 20px;
             max-width: 100%; /* 设置最大宽度为100% */
             box-sizing: border-box; /* 让padding不影响最大宽度 */
+            background-color: rgba(255, 255, 255, 0.8); /* 保证编辑框可读性 */
+            z-index: 2; /* 使编辑框在遮罩之上 */
         }
-        /* 媒体查询：屏幕宽度小于768px时应用下面的样式 */
-        @media screen and (max-width: 768px) {
-            .container {
-                flex-direction: column; /* 垂直排列 */
-            }
-            .right-box {
-                width: 100%; /* 平分屏幕宽度 */
-            }
-            .config-content {
-                white-space: normal; /* 在小屏幕下允许内容换行 */
-                margin-left: 20px; /* 与左边隔开20px，根据需要调整距离 */
-                margin-right: 20px; /* 与右边隔开20px，根据需要调整距离 */
-            }
+        /* 夜间模式下的样式 */
+        .dark-mode .overlay {
+            background-color: rgba(0, 0, 0, 0.5); /* 黑色遮罩 */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        .dark-mode .title,
+        .dark-mode .right-box {
+            color: #fff;
+        }
+        button {
+            padding: 10px 20px; /* 增加按钮的触摸目标尺寸 */
+            margin: 5px; /* 增加按钮的间距 */
+        }
+        input[type="submit"] {
+            padding: 10px 20px; /* 增加按钮的触摸目标尺寸 */
+            margin: 5px; /* 增加按钮的间距 */
+        }
+        select {
+            padding: 10px; /* 增加选择框的触摸目标尺寸 */
         }
     </style>
 </head>
 <body>
-    <div class="title">LazyConf by <a href="https://github.com/krisstibex" target="_blank">Miku404</a></div>
+    <div class="overlay"></div>
     <div class="container">
-        <!--
-        <div class="left-box">
-            <h1>Providers JSON 模板</h1>
-            <form id="providers-form" method="POST" action="/update_providers">
-                <textarea name="providers_data" rows="10" cols="40" style="width: 400px; height: 400px;">{{ providers_data | safe }}</textarea>
-                <br>
-            </form>
-        </div>
-        -->
         <div class="right-box">
             <h1>Edit TEMP_JSON_DATA</h1>
+            <div class="title">LazyConf by <a href="https://github.com/krisstibex" target="_blank">Miku404</a></div>
             <form id="temp-json-form" method="POST" action="/edit_temp_json">
-                <textarea name="temp_json_data" rows="10" cols="40" style="width: 400px; height: 400px;">{{ temp_json_data | default('') }}</textarea>
+                <label for="temp-json-data">JSON Data:</label>
+                <textarea id="temp-json-data" name="temp_json_data" rows="10" cols="40">{{ temp_json_data | default('') }}</textarea>
                 <br>
-                <input type="submit" value="save">
+                <input type="submit" value="Save">
             </form>
             <button onclick="toggleLanguage()">Switch Language</button>
+            <button id="switch-dark-mode" onclick="toggleDarkMode()">Switch Dark Mode</button>
             <div class="form-container" style="display: flex; align-items: center;">
                 <form method="POST" action="/generate_config" style="display: flex; align-items: center;">
-                    <select name="template_index">
+                    <label for="template_index">Select Template:</label>
+                    <select id="template_index" name="template_index">
                         {% for option in template_options %}
                         <option value="{{ loop.index - 1 }}">{{ option }}</option>
                         {% endfor %}
@@ -105,5 +101,50 @@
                 </form>
             </div>
         </div>
+    </div>
+    <script>
+        function applyDarkMode(isDark) {
+            if (isDark) {
+                document.body.classList.add('dark-mode');
+            } else {
+                document.body.classList.remove('dark-mode');
+            }
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+        }
+
+        // 根据 User-Agent 检测移动设备
+        function detectMobile() {
+            const ua = navigator.userAgent || navigator.vendor || window.opera;
+            const isMobile = /android|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(ua);
+            return isMobile;
+        }
+
+        // 初始化时设置背景和布局
+        function initialize() {
+            if (detectMobile()) {
+                document.body.style.backgroundImage = "url('https://cdn.jsdelivr.net/gh/krisstibex/Rule@main/Other/Mobile.webp')";
+                document.querySelector('.container').style.flexDirection = 'column';
+                document.querySelector('.right-box').style.width = '100%';
+                document.querySelector('.title').style.textAlign = 'center'; // 居中对齐
+            } else {
+                document.body.style.backgroundImage = "url('https://cdn.jsdelivr.net/gh/krisstibex/Rule@main/Other/PC.webp')";
+            }
+        }
+
+        // 检测系统夜间模式
+        const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        darkModeMediaQuery.addListener((e) => {
+            applyDarkMode(e.matches);
+        });
+
+        // 初始化时根据系统设置应用夜间模式
+        applyDarkMode(darkModeMediaQuery.matches);
+        
+        // 初始化设置
+        initialize();
+    </script>
 </body>
 </html>
