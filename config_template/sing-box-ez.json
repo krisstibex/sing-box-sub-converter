@@ -50,7 +50,7 @@
       "type": "tun",
       "inet4_address": "172.19.0.0/30",
       "inet6_address": "fdfe:dcba:9876::0/126",
-      "stack": "system",
+      "stack": "mixed",
       "auto_route": true,
       "sniff": true,
       "platform": {
@@ -81,13 +81,13 @@
       "type": "block",
       "tag": "block"
     },
-		{
+    {
       "tag": "Proxy",
       "type": "selector",
       "outbounds": [
-				"{all}",
-				"direct"
-			]
+	      "{all}",
+	      "direct"
+      ]
     }
   ],
   "route": {
@@ -146,8 +146,8 @@
         "outbound": "direct"
       }
     ],
-		"rule_set": [
-			{
+	"rule_set": [
+      {
         "tag": "AD",
         "type": "remote",
         "format": "binary",
@@ -159,27 +159,27 @@
         "tag": "geosite-geolocation-cn",
         "format": "binary",
         "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-geolocation-cn.srs",
-				"download_detour": "Proxy"
+	"download_detour": "Proxy"
       },
       {
         "type": "remote",
         "tag": "geosite-geolocation-!cn",
         "format": "binary",
         "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-geolocation-!cn.srs",
-				"download_detour": "Proxy"
+	"download_detour": "Proxy"
       },
       {
         "type": "remote",
         "tag": "geoip-cn",
         "format": "binary",
         "url": "https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs",
-				"download_detour": "Proxy"
+	"download_detour": "Proxy"
       }
 		],
-		"final": "Proxy",
+    "final": "Proxy",
     "auto_detect_interface": true
   },
-	"experimental": {
+  "experimental": {
     "clash_api": {
       "external_controller": "127.0.0.1:9090",
       "external_ui": "ui",
