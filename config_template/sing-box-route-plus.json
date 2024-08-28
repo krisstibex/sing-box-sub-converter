@@ -1,0 +1,528 @@
+{
+  "dns": {
+    "servers": [
+      {
+        "tag": "google",
+        "address": "tls://8.8.8.8"
+      },
+      {
+        "tag": "local",
+        "address": "https://223.5.5.5/dns-query",
+        "detour": "Direct"
+      }
+    ],
+    "rules": [
+      {
+        "outbound": "any",
+        "server": "local"
+      },
+      {
+        "clash_mode": "Direct",
+        "server": "local"
+      },
+      {
+        "clash_mode": "Global",
+        "server": "google"
+      },
+      {
+        "rule_set": "geosite-geolocation-cn",
+        "server": "local"
+      },
+      {
+        "type": "logical",
+        "mode": "and",
+        "rules": [
+          {
+            "rule_set": "geosite-geolocation-!cn",
+            "invert": true
+          },
+          {
+            "rule_set": "geoip-cn"
+          }
+        ],
+        "server": "google",
+        "client_subnet": "223.5.5.5/24"
+      }
+    ]
+  },
+  "route": {
+    "rules": [
+      {
+        "type": "logical",
+        "mode": "or",
+        "rules": [
+          {
+            "protocol": "dns"
+          },
+          {
+            "port": 53
+          }
+        ],
+        "outbound": "dns-out"
+      },
+      {
+        "ip_is_private": true,
+        "outbound": "Direct"
+      },
+      {
+        "clash_mode": "Direct",
+        "outbound": "Direct"
+      },
+      {
+        "clash_mode": "Global",
+        "outbound": "GLOBAL"
+      },
+			{
+        "type": "logical",
+        "mode": "or",
+        "rules": [
+          {
+            "port": 853
+          },
+          {
+            "network": "udp",
+            "port": 443
+          },
+          {
+            "protocol": "stun"
+          }
+        ],
+        "outbound": "block"
+      },
+      {
+        "rule_set": "AD",
+        "outbound": "block"
+      },
+      {
+        "rule_set": "AppleProxy",
+        "outbound": "Proxy"
+      },
+      {
+        "rule_set": "Apple",
+        "outbound": "Direct"
+      },
+      {
+        "rule_set": "Github",
+        "outbound": "Github"
+      },
+      {
+        "rule_set": "Microsoft",
+        "outbound": "Microsoft"
+      },
+      {
+        "rule_set": "Telegram",
+        "outbound": "Telegram"
+      },
+      {
+        "rule_set": "Netflix",
+        "outbound": "Netflix"
+      },
+      {
+        "rule_set": "Disney+",
+        "outbound": "Disney+"
+      },
+      {
+        "rule_set": "Youtube",
+        "outbound": "Youtube"
+      },
+      {
+        "rule_set": "Google",
+        "outbound": "Youtube"
+      },
+      {
+        "rule_set": "Spotify",
+        "outbound": "Spotify"
+      },
+      {
+        "rule_set": "BiliBili",
+        "outbound": "BiliBili"
+      },
+      {
+        "rule_set": "geosite-geolocation-!cn",
+        "outbound": "Proxy"
+      },
+      {
+        "rule_set": [
+				"geosite-geolocation-cn",
+				"geoip-cn"
+				],
+        "outbound": "Direct"
+      }
+    ],
+    "rule_set": [
+      {
+        "tag": "AD",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://github.com/krisstibex/Sing-Rule/releases/latest/download/adrules.srs",
+        "download_detour": "Github"
+      },
+      {
+        "tag": "AppleProxy",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://github.com/krisstibex/Sing-Rule/releases/latest/download/AppleProxy.srs",
+        "download_detour": "Github"
+      },
+      {
+        "tag": "Apple",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://github.com/krisstibex/Sing-Rule/releases/latest/download/Apple_Classical.srs",
+        "download_detour": "Github"
+      },
+      {
+        "tag": "Github",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://github.com/krisstibex/Sing-Rule/releases/latest/download/GitHub.srs",
+        "download_detour": "Github"
+      },
+      {
+        "tag": "Microsoft",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://github.com/krisstibex/Sing-Rule/releases/latest/download/Microsoft.srs",
+        "download_detour": "Github"
+      },
+      {
+        "tag": "Telegram",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://github.com/krisstibex/Sing-Rule/releases/latest/download/telegram.srs",
+        "download_detour": "Github"
+      },
+      {
+        "tag": "Netflix",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://github.com/krisstibex/Sing-Rule/releases/latest/download/Netflix_Classical.srs",
+        "download_detour": "Github"
+      },
+      {
+        "tag": "Disney+",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://github.com/krisstibex/Sing-Rule/releases/latest/download/Disney.srs",
+        "download_detour": "Github"
+      },
+      {
+        "tag": "Youtube",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://github.com/krisstibex/Sing-Rule/releases/latest/download/YouTube.srs",
+        "download_detour": "Github"
+      },
+      {
+        "tag": "Google",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://github.com/krisstibex/Sing-Rule/releases/latest/download/Google.srs",
+        "download_detour": "Github"
+      },
+      {
+        "tag": "Spotify",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://github.com/krisstibex/Sing-Rule/releases/latest/download/Spotify.srs",
+        "download_detour": "Github"
+      },
+      {
+        "tag": "BiliBili",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://github.com/krisstibex/Sing-Rule/releases/latest/download/BiliBili.srs",
+        "download_detour": "Github"
+      },
+      {
+        "type": "remote",
+        "tag": "geosite-geolocation-cn",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-geolocation-cn.srs",
+				"download_detour": "Github"
+      },
+      {
+        "type": "remote",
+        "tag": "geosite-geolocation-!cn",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-geolocation-!cn.srs",
+				"download_detour": "Github"
+      },
+      {
+        "type": "remote",
+        "tag": "geoip-cn",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs",
+				"download_detour": "Github"
+      }
+    ],
+    "final": "Final",
+    "auto_detect_interface": true
+  },
+  "outbounds": [
+    {
+      "tag": "Microsoft",
+      "type": "selector",
+      "outbounds": [
+        "HongKong",
+        "Taiwan",
+        "Japan",
+        "Singapore",
+        "USA",
+        "All",
+        "Direct"
+      ],
+      "default": "Direct"
+    },
+    {
+      "tag": "Github",
+      "type": "selector",
+      "outbounds": [
+        "HongKong",
+        "Taiwan",
+        "Japan",
+        "Singapore",
+        "USA",
+        "All",
+        "Direct"
+      ],
+      "default": "HongKong"
+    },
+    {
+      "tag": "Telegram",
+      "type": "selector",
+      "outbounds": [
+        "Direct",
+        "HongKong",
+        "Taiwan",
+        "Singapore",
+        "Japan",
+        "USA",
+        "All"
+      ],
+      "default": "Singapore"
+    },
+    {
+      "tag": "Netflix",
+      "type": "selector",
+      "outbounds": [
+        "Direct",
+        "HongKong",
+        "Taiwan",
+        "Singapore",
+        "Japan",
+        "USA",
+        "All"
+      ],
+      "default": "Singapore"
+    },
+    {
+      "tag": "Disney+",
+      "type": "selector",
+      "outbounds": [
+        "Direct",
+        "HongKong",
+        "Taiwan",
+        "Singapore",
+        "Japan",
+        "USA",
+        "All"
+      ],
+      "default": "USA"
+    },
+    {
+      "tag": "Youtube",
+      "type": "selector",
+      "outbounds": [
+        "Direct",
+        "HongKong",
+        "Taiwan",
+        "Singapore",
+        "Japan",
+        "USA",
+        "All"
+      ],
+      "default": "USA"
+    },
+    {
+      "tag": "Spotify",
+      "type": "selector",
+      "outbounds": [
+        "Direct",
+        "HongKong",
+        "Taiwan",
+        "Singapore",
+        "Japan",
+        "USA",
+        "All"
+      ],
+      "default": "Direct"
+    },
+    {
+      "tag": "BiliBili",
+      "type": "selector",
+      "outbounds": [
+        "Direct",
+        "HongKong",
+        "Taiwan"
+      ],
+      "default": "Direct"
+    },
+    {
+      "tag": "Proxy",
+      "type": "selector",
+      "outbounds": [
+        "Direct",
+        "HongKong",
+        "Taiwan",
+        "Singapore",
+        "Japan",
+        "USA",
+        "All"
+      ],
+      "default": "USA"
+    },
+    {
+      "tag": "GLOBAL",
+      "type": "selector",
+      "outbounds": [
+        "Direct",
+        "HongKong",
+        "Taiwan",
+        "Singapore",
+        "Japan",
+        "USA",
+        "All"
+      ],
+      "default": "USA"
+    },
+    {
+      "tag": "Final",
+      "type": "selector",
+      "outbounds": [
+        "Direct",
+        "Proxy"
+      ],
+      "default": "Proxy"
+    },
+    {
+      "tag": "HongKong",
+      "type": "selector",
+      "outbounds":[
+        "{all}",
+        "Direct4EmptyGroup"
+      ],
+      "filter":[
+        {"action":"include","keywords":["🇭🇰|HK|hk|香港|港|HongKong"]}
+      ]
+    },
+    {
+      "tag": "Taiwan",
+      "type": "selector",
+      "outbounds":[
+        "{all}",
+        "Direct4EmptyGroup"
+      ],
+      "filter":[
+        {"action":"include","keywords":["🇹🇼|🇨🇳|TW|tw|台湾|臺灣|台|Taiwan"]}
+      ]
+    },
+    {
+      "tag": "Singapore",
+      "type": "selector",
+      "outbounds":[
+        "{all}",
+        "Direct4EmptyGroup"
+      ],
+      "filter":[
+        {"action":"include","keywords":["🇸🇬|SG|sg|新加坡|狮|Singapore"]}
+      ]
+    },
+    {
+      "tag": "Japan",
+      "type": "selector",
+      "outbounds":[
+        "{all}",
+        "Direct4EmptyGroup"
+      ],
+      "filter":[
+        {"action":"include","keywords":["🇯🇵|JP|jp|日本|日|Japan"]}
+      ]
+    },
+    {
+      "tag": "USA",
+      "type": "selector",
+      "outbounds":[
+        "{all}",
+        "Direct4EmptyGroup"
+      ],
+      "filter":[
+        {"action":"include","keywords":["🇺🇸|US|美国|美|United States"]}
+      ]
+    },
+    {
+      "tag": "All",
+      "type": "selector",
+      "outbounds":[
+        "{all}"
+      ]
+    },
+    {
+      "tag": "Direct4EmptyGroup",
+      "type": "direct"
+    },
+    {
+      "tag": "Direct",
+      "type": "direct"
+    },
+    {
+      "tag": "block",
+      "type": "block"
+    },
+    {
+      "tag": "dns-out",
+      "type": "dns"
+    }
+  ],
+  "inbounds": [
+    {
+      "type": "tun",
+      "inet4_address": "172.19.0.0/30",
+      "inet6_address": "fdfe:dcba:9876::0/126",
+      "stack": "mixed",
+      "auto_route": true,
+      "sniff": true,
+      "platform": {
+        "http_proxy": {
+          "enabled": true,
+          "server": "127.0.0.1",
+          "server_port": 7890
+        }
+      }
+    },
+    {
+      "type": "mixed",
+      "listen": "127.0.0.1",
+      "listen_port": 7890,
+      "sniff": true
+    }
+  ],
+  "experimental": {
+    "clash_api": {
+      "external_controller": "127.0.0.1:9090",
+      "external_ui": "ui",
+      "external_ui_download_url": "https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip",
+      "external_ui_download_detour": "Github",
+      "default_mode": "Enhanced"
+    },
+    "cache_file": {
+      "enabled": true,
+      "store_rdrc": true
+    }
+  },
+  "log": {
+    "disabled": false,
+    "level": "info",
+    "timestamp": true
+  }
+}
