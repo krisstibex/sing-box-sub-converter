@@ -154,84 +154,84 @@
         "tag": "AD",
         "type": "remote",
         "format": "binary",
-        "url": "https://github.com/krisstibex/Sing-Rule/releases/latest/download/adrules.srs",
+        "url": "https://github.com/krisstibex/sing-box-ruleset/releases/latest/download/adrules.srs",
         "download_detour": "Github"
       },
       {
         "tag": "AppleProxy",
         "type": "remote",
         "format": "binary",
-        "url": "https://github.com/krisstibex/Sing-Rule/releases/latest/download/AppleProxy.srs",
+        "url": "https://github.com/krisstibex/sing-box-ruleset/releases/latest/download/AppleProxy.srs",
         "download_detour": "Github"
       },
       {
         "tag": "Apple",
         "type": "remote",
         "format": "binary",
-        "url": "https://github.com/krisstibex/Sing-Rule/releases/latest/download/Apple_Classical.srs",
+        "url": "https://github.com/krisstibex/sing-box-ruleset/releases/latest/download/Apple_Classical.srs",
         "download_detour": "Github"
       },
       {
         "tag": "Github",
         "type": "remote",
         "format": "binary",
-        "url": "https://github.com/krisstibex/Sing-Rule/releases/latest/download/GitHub.srs",
+        "url": "https://github.com/krisstibex/sing-box-ruleset/releases/latest/download/GitHub.srs",
         "download_detour": "Github"
       },
       {
         "tag": "Microsoft",
         "type": "remote",
         "format": "binary",
-        "url": "https://github.com/krisstibex/Sing-Rule/releases/latest/download/Microsoft.srs",
+        "url": "https://github.com/krisstibex/sing-box-ruleset/releases/latest/download/Microsoft.srs",
         "download_detour": "Github"
       },
       {
         "tag": "Telegram",
         "type": "remote",
         "format": "binary",
-        "url": "https://github.com/krisstibex/Sing-Rule/releases/latest/download/telegram.srs",
+        "url": "https://github.com/krisstibex/sing-box-ruleset/releases/latest/download/telegram.srs",
         "download_detour": "Github"
       },
       {
         "tag": "Netflix",
         "type": "remote",
         "format": "binary",
-        "url": "https://github.com/krisstibex/Sing-Rule/releases/latest/download/Netflix_Classical.srs",
+        "url": "https://github.com/krisstibex/sing-box-ruleset/releases/latest/download/Netflix_Classical.srs",
         "download_detour": "Github"
       },
       {
         "tag": "Disney+",
         "type": "remote",
         "format": "binary",
-        "url": "https://github.com/krisstibex/Sing-Rule/releases/latest/download/Disney.srs",
+        "url": "https://github.com/krisstibex/sing-box-ruleset/releases/latest/download/Disney.srs",
         "download_detour": "Github"
       },
       {
         "tag": "Youtube",
         "type": "remote",
         "format": "binary",
-        "url": "https://github.com/krisstibex/Sing-Rule/releases/latest/download/YouTube.srs",
+        "url": "https://github.com/krisstibex/sing-box-ruleset/releases/latest/download/YouTube.srs",
         "download_detour": "Github"
       },
       {
         "tag": "Google",
         "type": "remote",
         "format": "binary",
-        "url": "https://github.com/krisstibex/Sing-Rule/releases/latest/download/Google.srs",
+        "url": "https://github.com/krisstibex/sing-box-ruleset/releases/latest/download/Google.srs",
         "download_detour": "Github"
       },
       {
         "tag": "Spotify",
         "type": "remote",
         "format": "binary",
-        "url": "https://github.com/krisstibex/Sing-Rule/releases/latest/download/Spotify.srs",
+        "url": "https://github.com/krisstibex/sing-box-ruleset/releases/latest/download/Spotify.srs",
         "download_detour": "Github"
       },
       {
         "tag": "BiliBili",
         "type": "remote",
         "format": "binary",
-        "url": "https://github.com/krisstibex/Sing-Rule/releases/latest/download/BiliBili.srs",
+        "url": "https://github.com/krisstibex/sing-box-ruleset/releases/latest/download/BiliBili.srs",
         "download_detour": "Github"
       },
       {
