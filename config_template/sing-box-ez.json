@@ -151,28 +151,28 @@
         "tag": "AD",
         "type": "remote",
         "format": "binary",
-        "url": "https://github.com/krisstibex/Sing-Rule/releases/latest/download/adrules.srs",
+        "url": "https://ghp.ci/https://github.com/krisstibex/Sing-Rule/releases/latest/download/adrules.srs",
         "download_detour": "Proxy"
       },
       {
         "type": "remote",
         "tag": "geosite-geolocation-cn",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-geolocation-cn.srs",
+        "url": "https://ghp.ci/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-geolocation-cn.srs",
 	"download_detour": "Proxy"
       },
       {
         "type": "remote",
         "tag": "geosite-geolocation-!cn",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-geolocation-!cn.srs",
+        "url": "https://ghp.ci/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-geolocation-!cn.srs",
 	"download_detour": "Proxy"
       },
       {
         "type": "remote",
         "tag": "geoip-cn",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs",
+        "url": "https://ghp.ci/https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs",
 	"download_detour": "Proxy"
       }
 		],
