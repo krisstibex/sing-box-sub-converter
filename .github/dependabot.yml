@@ -1,0 +1,8 @@
+version: 2
+updates:
+  - package-ecosystem: "pip"  # 适用于 Python 项目
+    directory: "/"              # 包含 requirements.txt 的目录
+    schedule:
+      interval: "weekly"        # 更新频率，可选值: daily, weekly, monthly
+    commit-message:
+      prefix: "deps"
